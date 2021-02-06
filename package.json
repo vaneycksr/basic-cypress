@@ -1,0 +1,28 @@
+{
+  "name": "basic-cypress",
+  "version": "1.0.0",
+  "description": "Aprendendo cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaneycksr/basic-cypress.git"
+  },
+  "keywords": [
+    "cypress",
+    "test",
+    "automation",
+    "e2e"
+  ],
+  "author": "Van Eyck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vaneycksr/basic-cypress/issues"
+  },
+  "homepage": "https://github.com/vaneycksr/basic-cypress#readme",
+  "dependencies": {
+    "cypress": "^6.4.0"
+  }
+}
