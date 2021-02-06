@@ -35,14 +35,32 @@ describe("Tickets", () =>{
     });
 
     // Interagindo com checkboxes
-    it.only("Interagindo com checkboxes", ()=> {
+    it("Interagindo com checkboxes", ()=> {
         cy.get("#friend").check();
         cy.get("#publication").check();
         cy.get("#friend").uncheck();
     });
 
 
-    // teste
-    it("tem o título 'TICKETBOX' no header",() =>{} );
+    it("valida o título 'TICKETBOX' no header",() =>{
+        cy.get("header h1").should("contain","TICKETBOX");
+
+    });
+
+    it.only("Verifica e-mail INVÁLIDO",() =>{
+
+        cy.get("#email")
+            .as("email") // da um apelido para o elemento email para poder ser reutilizado
+            .type("email-gmail.com");
+
+        //verifica se existe essa classe de erro em específico
+        cy.get("#email.invalid").should("exist");
+
+        cy.get("@email") // com o @ retorna o alias que foi criado com esse nome
+            .clear() // limpa o valor do campo
+            .type("email@gmail.com");
+
+        cy.get("#email.invalid").should("not.exist");
+    });
 
 });
