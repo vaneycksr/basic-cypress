@@ -1,0 +1,2 @@
+# basic-cypress
+Learning cypress
