@@ -8,7 +8,7 @@ describe("Tickets", () =>{
    
     // preenchendo todos os campos do tipo texto
     // para executar apenas um teste, colocar: it.only()
-    it.only("Preenchendo todos so campos do tipo texto", ()=>{
+    it("Preenchendo todos so campos do tipo texto", () => {
 
         const firstName = "Van Eyck";
         const lastName = "Rosas";
@@ -22,6 +22,23 @@ describe("Tickets", () =>{
 
         // concatena o valor das variáveis
         cy.get("#signature").type(`${firstName} ${lastName}`);
+    });
+
+    // interagir com select
+    it("Interagindo com select, selecionando dois tickets", () => {
+        cy.get("#ticket-quantity").select("2");
+    });
+
+    // interagindo com radio button
+    it("interagindo com radio buttons", () => {
+        cy.get("#vip").check();
+    });
+
+    // Interagindo com checkboxes
+    it.only("Interagindo com checkboxes", ()=> {
+        cy.get("#friend").check();
+        cy.get("#publication").check();
+        cy.get("#friend").uncheck();
     });
 
 
