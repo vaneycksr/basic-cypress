@@ -63,7 +63,7 @@ describe("Tickets", () =>{
         cy.get("#email.invalid").should("not.exist");
     });
 
-    it.only("Preenchendo todo formulário e depois resetando",()=>{
+    it("Preenchendo todo formulário e depois resetando",()=>{
 
         const firstName = "Van Eyck";
         const lastName = "Rosas";
@@ -97,6 +97,30 @@ describe("Tickets", () =>{
 
         // valida que o campo de submeter o formulário está desabilitado pois os campos estão vazios
         cy.get("@submitButton").should("be.disabled");
+    });
+
+    it.only("Preenche campos obrigatorios utilizando comandos customizados",()=>{
+
+        const cliente = {
+            firstName: "João",
+            lastName: "Silva",
+            email: "joaosilva@example.com"
+        };
+
+        //função customaizada
+        cy.preencheCamposObrigatorios(cliente);
+
+          // valida que o botão está habilitado
+          cy.get("button[type='submit']")
+          .as("submitButton")
+          .should("not.be.disabled");
+
+        // limpa o botao de aceite de termos
+        cy.get("#agree").uncheck();
+
+        // valida que o campo de submeter o formulário está desabilitado pois os campos estão vazios
+        cy.get("@submitButton").should("be.disabled");
+
     });
 
 });

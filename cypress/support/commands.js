@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+// criando função customizada
+Cypress.Commands.add("preencheCamposObrigatorios", cliente =>{
+
+    cy.get("#first-name").type(cliente.firstName);
+    cy.get("#last-name").type(cliente.lastName);
+    cy.get("#email").type(cliente.email);
+    cy.get("#agree").check();
+
+});
