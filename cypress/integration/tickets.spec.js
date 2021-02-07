@@ -47,7 +47,7 @@ describe("Tickets", () =>{
 
     });
 
-    it.only("Verifica e-mail INVÁLIDO",() =>{
+    it("Verifica e-mail INVÁLIDO",() =>{
 
         cy.get("#email")
             .as("email") // da um apelido para o elemento email para poder ser reutilizado
@@ -61,6 +61,42 @@ describe("Tickets", () =>{
             .type("email@gmail.com");
 
         cy.get("#email.invalid").should("not.exist");
+    });
+
+    it.only("Preenchendo todo formulário e depois resetando",()=>{
+
+        const firstName = "Van Eyck";
+        const lastName = "Rosas";
+        const fullName = `${firstName} ${lastName}`;
+
+        cy.get("#first-name").type(firstName);
+        cy.get("#last-name").type(lastName);
+        cy.get("#email").type("teste@gmail.com");
+        cy.get("#ticket-quantity").select("2");
+        cy.get("#vip").check();
+        cy.get("#friend").check();
+        cy.get("#requests").type("hamburguer");
+
+        // verificar texto de acordo com as informações passadas acima
+        cy.get(".agreement p").should(
+            "contain",
+            `I, ${fullName}, wish to buy 2 VIP tickets.`
+        );
+
+        cy.get("#agree").click();
+        cy.get("#signature").type(fullName);
+
+        // valida que o botão está habilitado
+        cy.get("button[type='submit']")
+            .as("submitButton")
+            .should("not.be.disabled");
+
+
+        // clica no botão para limpar todos os campos do formulário
+        cy.get("button[type='reset']").click();
+
+        // valida que o campo de submeter o formulário está desabilitado pois os campos estão vazios
+        cy.get("@submitButton").should("be.disabled");
     });
 
 });
